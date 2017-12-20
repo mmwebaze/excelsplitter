@@ -1,7 +1,8 @@
 import json
+import os
 
 class SettingLoader:
-    configFile = '/Users/mwebazem/development/python/ExcelSplitter/config.json'
+    configFile = 'config.json'
 
     def __init__(self):
         #self.configFile = configFile;

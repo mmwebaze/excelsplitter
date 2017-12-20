@@ -12,21 +12,21 @@ class ExcelSplitter:
             column = self.getColumnName(data_frame)
             ls = self.getColumnValues(data_frame, columnName=column)
             self.createExcel(data_frame, ls, column)
-            #rows, columns = data_frame.shape
-            #print(data_frame[0])
-            #df = data_frame.loc[data_frame['CountryName'] == 'Ghana']
-            #print(df.head(100))
+
         except IOError as io:
             print(io.__doc__)
 
     def createExcel(self, data_frame, listOfnames, columnName):
-        #df = data_frame.loc[data_frame['CountryName'] == 'Ghana']
+        outputType = self.settings['output_type']
+        outputFolder = self.settings['output_folder']
+
         for item in listOfnames:
-            print(columnName + ':' + item+'.xlsx being created')
             df = data_frame.loc[data_frame[columnName] == item]
-            df.to_excel(self.settings['output_folder']+item+'.xlsx');
-
-
+            print(columnName + ': ' + item + '.'+outputType+' being created')
+            if outputType == 'xlsx':
+                df.to_excel(outputFolder+item+'.'+outputType)
+            else:
+                df.to_csv(outputFolder+item+'.'+outputType)
 
     def getColumnName(self, data_frame):
 
